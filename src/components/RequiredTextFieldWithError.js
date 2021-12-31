@@ -1,15 +1,16 @@
 import { InputAdornment, MenuItem, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import "../App.css";
 
 const RequiredTextFieldWithError = ({
   id,
   label,
+  helperText,
   type,
   recoilState,
   customErrors,
   adornment,
-  fullWidth, // is full width field or not
   select, // is menu-type or not
   menuItems, // if is menu-type, is menu-item list
   onError,
@@ -23,7 +24,7 @@ const RequiredTextFieldWithError = ({
   const handleError = (err, errMsg) => {
     setError(err);
     setErrorMessage(errMsg);
-    
+
     // if error is true add field to list of errored fields
     // otherwise remove it from errored fields
     if (err === true) onError(label);
@@ -42,9 +43,15 @@ const RequiredTextFieldWithError = ({
 
       // for each custom error if the "fieldIsValid" function returns true for "newValue" set error
       // otherwise clear error
-      (customErrors || []).forEach(({ fieldIsValid, errMsg }, i) =>
-        !fieldIsValid(newValue) ? handleError(true, errMsg) : noError()
-      );
+      for (let i = 0; i < (customErrors || []).length; i++) {
+        const { fieldIsValid, errMsg } = customErrors[i];
+        if (!fieldIsValid(newValue)) {
+          handleError(true, errMsg);
+          break;
+        }
+        noError();
+      }
+
       setValue(newValue);
     }
   };
@@ -52,9 +59,16 @@ const RequiredTextFieldWithError = ({
   return (
     <TextField
       id={id}
+      sx={{
+        m: 2,
+        mt: 2,
+        mb: 3,
+        width: 200,
+      }}
+      className="form-field"
       label={label}
       error={error}
-      helperText={errorMessage}
+      helperText={errorMessage || helperText}
       value={value}
       onChange={handleChange}
       InputProps={{
@@ -62,10 +76,9 @@ const RequiredTextFieldWithError = ({
           <InputAdornment position="end">{adornment}</InputAdornment>
         ),
       }}
-      variant="outlined"
+      variant="standard"
       type={type}
       required
-      fullWidth={fullWidth}
       select={select}
       // set default value if it is a menu-type field (has parameter "select")
       defaultValue={select && { value }}

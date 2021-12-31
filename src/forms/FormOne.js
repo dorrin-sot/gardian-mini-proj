@@ -1,10 +1,12 @@
-import { Button, LinearProgress } from "@mui/material";
+import { Box, Button, LinearProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";
 import * as Atoms from "../recoil_components/atoms";
+import NavigateNext from "@mui/icons-material/NavigateNext";
+import "../App.css";
 
-const FormOne = ({ onSubmit, isMobile, style }) => {
+const FormOne = ({ onSubmit, isMobile }) => {
   const customErrors = {
     age: [
       {
@@ -18,7 +20,7 @@ const FormOne = ({ onSubmit, isMobile, style }) => {
     ],
     phoneNumber: [
       {
-        fieldIsValid: (newVal) => /^\+([0-9]){2,3}(([0-9]){5,9})$/.test(newVal),
+        fieldIsValid: (newVal) => /^0([0-9]){2,3}(([0-9]){5,9})$/.test(newVal),
         errMsg: "فرمت تلفن همراه نادرست است",
       },
     ],
@@ -31,14 +33,14 @@ const FormOne = ({ onSubmit, isMobile, style }) => {
     ],
     weight: [
       {
-        fieldIsValid: (newVal) => newVal >= 0,
-        errMsg: "وزن نمیتواند عدد منفی باشد",
+        fieldIsValid: (newVal) => newVal > 0,
+        errMsg: "وزن باید عدد مثبت باشد",
       },
     ],
     height: [
       {
-        fieldIsValid: (newVal) => newVal >= 0,
-        errMsg: "قد نمیتواند عدد منفی باشد",
+        fieldIsValid: (newVal) => newVal > 0,
+        errMsg: "قد باید عدد مثبت باشد",
       },
     ],
   };
@@ -66,8 +68,6 @@ const FormOne = ({ onSubmit, isMobile, style }) => {
   const onError = (field) => {
     const newErroredFields = erroredFields.filter((f) => f !== field);
     setErroredFields([...newErroredFields, field]);
-
-    console.log(newErroredFields, erroredFields, [...newErroredFields, field]);
   };
   // if an error is fixed remove it from errored fields
   const onNotError = (field) => {
@@ -78,9 +78,10 @@ const FormOne = ({ onSubmit, isMobile, style }) => {
   };
 
   return (
-    <form style={style}>
-      <p>صدور بیمه نامه عمر</p>
+    <Box className="form">
+      <h2 className="form-title">صدور بیمه نامه عمر</h2>
       <RequiredTextFieldWithError
+        id="firstName"
         label="نام"
         recoilState={Atoms.firstNameState}
         onError={onError}
@@ -88,12 +89,15 @@ const FormOne = ({ onSubmit, isMobile, style }) => {
       />
       <RequiredTextFieldWithError
         label="نام خانوادگی"
+        id="lastname"
         recoilState={Atoms.lastNameState}
         onError={onError}
         onNotError={onNotError}
       />
+      <br />
       <RequiredTextFieldWithError
         label="تلفن همراه"
+        id="phoneNumber"
         recoilState={Atoms.phoneNumberState}
         customErrors={customErrors.phoneNumber}
         onError={onError}
@@ -101,6 +105,7 @@ const FormOne = ({ onSubmit, isMobile, style }) => {
       />
       <RequiredTextFieldWithError
         label="ایمیل"
+        id="email"
         type="email"
         recoilState={Atoms.emailState}
         customErrors={customErrors.email}
@@ -108,8 +113,10 @@ const FormOne = ({ onSubmit, isMobile, style }) => {
         onError={onError}
         onNotError={onNotError}
       />
+      <br />
       <RequiredTextFieldWithError
         label="سن"
+        id="age"
         recoilState={Atoms.ageState}
         type="number"
         customErrors={customErrors.age}
@@ -118,6 +125,7 @@ const FormOne = ({ onSubmit, isMobile, style }) => {
       />
       <RequiredTextFieldWithError
         label="وزن"
+        id="weight"
         recoilState={Atoms.weightState}
         type="number"
         customErrors={customErrors.weight}
@@ -128,6 +136,7 @@ const FormOne = ({ onSubmit, isMobile, style }) => {
       <RequiredTextFieldWithError
         id="height"
         label="قد"
+        helperText={BMI > 0 && `BMI شما: ${BMI}`}
         recoilState={Atoms.heightState}
         type="number"
         customErrors={customErrors.height}
@@ -136,7 +145,7 @@ const FormOne = ({ onSubmit, isMobile, style }) => {
         onNotError={onNotError}
       />
       {/* if BMI > 0 show it as a label */}
-      {BMI > 0 && <label htmlFor="height">BMI شما: {BMI}</label>}
+      {/*{BMI > 0 && <label htmlFor="height">BMI شما: {BMI}</label>}*/}
       <RequiredTextFieldWithError
         label="بیمه انتخابی"
         recoilState={Atoms.agencyState}
@@ -151,16 +160,17 @@ const FormOne = ({ onSubmit, isMobile, style }) => {
         variant="outlined"
         type="submit"
         disabled={erroredFields.length > 0}
+        startIcon={<NavigateNext />}
         onClick={onSubmit}
       >
-        صفحه بعد!
+        صفحه بعد
       </Button>
-    </form>
+    </Box>
   );
 };
 
 function calcBMI(weight, height) {
-  return Math.round((weight / (height * height)) * 100) / 100;
+  return Math.round((weight / (height * height)) * 1000) / 1000;
 }
 
 export default FormOne;

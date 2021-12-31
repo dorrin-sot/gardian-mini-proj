@@ -6,10 +6,6 @@ import createCache from "@emotion/cache";
 import FormOne from "./forms/FormOne";
 import FormTwo from "./forms/FormTwo";
 
-const formStyle = {
-  /* todo */
-};
-
 // RTL cache and theme handling
 const cacheRtl = createCache({
   key: "muirtl",
@@ -36,12 +32,10 @@ function App() {
             <FormOne
               onSubmit={goToPageTwo}
               // isMobile={isMobile}
-              style={formStyle}
             />
           ) : (
             <FormTwo
-              // isMobile={isMobile}
-              style={formStyle}
+            // isMobile={isMobile}
             />
           )}
         </div>

@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Cinema';
+    src: url(./static/fonts/Cinema.ttf);
+}
+
+@font-face {
+    font-family: 'Yekan';
+    src: url(./static/fonts/Yekan.ttf);
+}
+
+.form {
+    background-color: rgba(255, 255, 255, .75);
+    border-radius: 25px;
+    width: 75%;
+    transform: translateY(50%);
+    margin: auto;
+    padding: 30px;
+}
+
+.form-title {
+    font-family: Cinema;
+    font-size: xx-large;
+    text-align: center;
+}
+
+.form-field input,
+.form-field label,
+.form-field helperText {
+    font-family: Yekan, ui-rounded;
+}
