@@ -87,3 +87,8 @@ export const vapeCountState = atom({
   key: "vapeCountState",
   default: 0,
 });
+
+export const sicknessesState = atom({
+  key: "sicknessesState",
+  default: "",
+});

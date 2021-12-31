@@ -4,6 +4,7 @@ import * as Atoms from "../recoil_components/atoms";
 import NavigateNext from "@mui/icons-material/NavigateNext";
 import "../App.css";
 import CheckBoxTextFieldPair from "../recoil_components/CheckBoxTextFieldPair";
+import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";
 
 const FormTwo = ({ onSubmit, stepper }) => {
   const customErrors = {
@@ -59,6 +60,18 @@ const FormTwo = ({ onSubmit, stepper }) => {
         onNotError={onNotError}
         customErrors={customErrors.vapeCount}
       />
+      <RequiredTextFieldWithError
+        label="بیماری‌ها و معلولیت‌ها"
+        id="sicknesses"
+        fullWidth
+        multiline
+        required={false}
+        onError={(id) => {}}
+        onNotError={(id) => {}}
+        recoilState={Atoms.sicknessesState}
+        helperText="فهرستی از بیماری‌ها و یا معلولیت‌هایتان را در اینجا بنویسید"
+      />
+      <br />
       <Button
         variant="outlined"
         type="submit"

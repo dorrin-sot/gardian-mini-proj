@@ -11,6 +11,9 @@ const RequiredTextFieldWithError = ({
   recoilState,
   customErrors,
   adornment,
+  fullWidth,
+  multiline,
+  required = true, // required by default
   select, // is menu-type or not
   menuItems, // if is menu-type, is menu-item list
   onError,
@@ -39,7 +42,7 @@ const RequiredTextFieldWithError = ({
   const handleChange = ({ target: { value: newValue } }) => {
     // if is empty show empty error
     // otherwise clear error
-    if (!newValue || newValue === "") emptyError();
+    if (required && (!newValue || newValue === "")) emptyError();
     else {
       noError();
 
@@ -65,7 +68,7 @@ const RequiredTextFieldWithError = ({
         m: 2,
         mt: 2,
         mb: 3,
-        width: 200,
+        width: fullWidth ? 750 : 200,
       }}
       className="form-field"
       label={label}
@@ -79,8 +82,10 @@ const RequiredTextFieldWithError = ({
         ),
       }}
       variant="standard"
+      fullWidth={fullWidth}
+      multiline={multiline}
       type={type}
-      required
+      required={required}
       select={select}
       disabled={disabled}
       // set default value if it is a menu-type field (has parameter "select")
