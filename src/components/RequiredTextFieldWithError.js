@@ -15,6 +15,7 @@ const RequiredTextFieldWithError = ({
   menuItems, // if is menu-type, is menu-item list
   onError,
   onNotError,
+  disabled,
 }) => {
   const [value, setValue] = useRecoilState(recoilState);
   const [error, setError] = useState(false);
@@ -27,8 +28,9 @@ const RequiredTextFieldWithError = ({
 
     // if error is true add field to list of errored fields
     // otherwise remove it from errored fields
-    if (err === true) onError(label);
-    else onNotError(label);
+    console.log(id, err);
+    if (err === true) onError(id);
+    else onNotError(id);
   };
   const noError = () => handleError(false, "");
   const emptyError = () => handleError(true, `لطفا ${label} خود را وارد کنید`);
@@ -80,6 +82,7 @@ const RequiredTextFieldWithError = ({
       type={type}
       required
       select={select}
+      disabled={disabled}
       // set default value if it is a menu-type field (has parameter "select")
       defaultValue={select && { value }}
     >

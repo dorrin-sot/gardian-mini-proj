@@ -1,4 +1,4 @@
-import { Box, Button, LinearProgress } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";
@@ -6,7 +6,7 @@ import * as Atoms from "../recoil_components/atoms";
 import NavigateNext from "@mui/icons-material/NavigateNext";
 import "../App.css";
 
-const FormOne = ({ onSubmit, isMobile }) => {
+const FormOne = ({ onSubmit, stepper }) => {
   const customErrors = {
     age: [
       {
@@ -56,13 +56,13 @@ const FormOne = ({ onSubmit, isMobile }) => {
   // errored fields are fields that have encountered error(s)
   // all fields are empty in the beginning
   const [erroredFields, setErroredFields] = useState([
-    "نام",
-    "نام خانوادگی",
-    "تلفن همراه",
-    "ایمیل",
-    "سن",
-    "وزن",
-    "قد",
+    "firstName",
+    "lastName",
+    "phoneNumber",
+    "email",
+    "age",
+    "weight",
+    "height",
   ]);
   // if an error occurs add it to errored fields
   const onError = (field) => {
@@ -80,6 +80,7 @@ const FormOne = ({ onSubmit, isMobile }) => {
   return (
     <Box className="form">
       <h2 className="form-title">صدور بیمه نامه عمر</h2>
+      {stepper}
       <RequiredTextFieldWithError
         id="firstName"
         label="نام"
@@ -144,8 +145,6 @@ const FormOne = ({ onSubmit, isMobile }) => {
         onError={onError}
         onNotError={onNotError}
       />
-      {/* if BMI > 0 show it as a label */}
-      {/*{BMI > 0 && <label htmlFor="height">BMI شما: {BMI}</label>}*/}
       <RequiredTextFieldWithError
         label="بیمه انتخابی"
         recoilState={Atoms.agencyState}
@@ -154,16 +153,15 @@ const FormOne = ({ onSubmit, isMobile }) => {
         onError={onError}
         onNotError={onNotError}
       />
-
-      <LinearProgress variant="determinate" value={50} />
       <Button
+        className="submit-form-btn"
         variant="outlined"
         type="submit"
         disabled={erroredFields.length > 0}
         startIcon={<NavigateNext />}
         onClick={onSubmit}
       >
-        صفحه بعد
+        <span className="submit-form-btn">صفحه بعد</span>
       </Button>
     </Box>
   );
