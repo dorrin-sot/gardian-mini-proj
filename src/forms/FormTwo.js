@@ -3,7 +3,7 @@ import { useState } from "react";
 import * as Atoms from "../recoil_components/atoms";
 import NavigateNext from "@mui/icons-material/NavigateNext";
 import "../App.css";
-import CheckBoxTextFieldPair from "../recoil_components/CheckBoxTextFieldPair";
+import CheckBoxTextFieldPair from "../components/CheckBoxTextFieldPair";
 import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";
 
 const FormTwo = ({ onSubmit, stepper }) => {

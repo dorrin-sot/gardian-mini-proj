@@ -6,7 +6,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useRecoilState } from "recoil";
-import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";
+import RequiredTextFieldWithError from "./RequiredTextFieldWithError";
 import "../App.css";
 
 const CheckBoxTextFieldPair = ({
