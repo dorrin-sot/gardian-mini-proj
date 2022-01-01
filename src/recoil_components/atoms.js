@@ -83,9 +83,18 @@ export const heightState = atom({
   default: 0,
 });
 
-export const bmiState = atom({
+function calcBMI(weight, height) {
+  return Math.round((weight / (height * height)) * 1000) / 1000;
+}
+
+export const bmiState = selector({
   key: "bmiState",
-  default: 0,
+  get: ({ get }) => {
+    const [weight, height] = [get(weightState), get(heightState)];
+
+    if (weight > 0 && height > 0) return calcBMI(weight, height);
+    return 0;
+  },
 });
 
 export const agencies = ["بیمه ۱", "بیمه ۲", "بیمه ۳", "بیمه ۴"];

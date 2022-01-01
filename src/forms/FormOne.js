@@ -1,6 +1,6 @@
 import { Stack, Button } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useState } from "react";
+import { useRecoilValue } from "recoil";
 import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";
 import * as Atoms from "../recoil_components/atoms";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
@@ -46,13 +46,7 @@ const FormOne = ({ onSubmit }) => {
     ],
   };
 
-  // listen for changes in weight and height and update bmi
-  const [BMI, setBMI] = useRecoilState(Atoms.bmiState);
-  const weight = useRecoilValue(Atoms.weightState);
-  const height = useRecoilValue(Atoms.heightState);
-  useEffect(() => {
-    if (weight > 0 && height > 0) setBMI(calcBMI(weight, height));
-  }, [weight, height]);
+  const BMI = useRecoilValue(Atoms.bmiState);
 
   // errored fields are fields that have encountered error(s)
   // all fields are empty in the beginning
@@ -94,7 +88,7 @@ const FormOne = ({ onSubmit }) => {
           onNotError={onNotError}
           fullWidth
         />
-      </Stack>
+      </Stack>{" "}
       <Stack direction="row" justifyContent="center" alignItems="center">
         <RequiredTextFieldWithError
           label="تلفن همراه"
@@ -103,7 +97,7 @@ const FormOne = ({ onSubmit }) => {
           customErrors={customErrors.phoneNumber}
           onError={onError}
           onNotError={onNotError}
-        />
+        />{" "}
         <RequiredTextFieldWithError
           label="ایمیل"
           id="email"
@@ -114,7 +108,7 @@ const FormOne = ({ onSubmit }) => {
           onNotError={onNotError}
           fullWidth
         />
-      </Stack>
+      </Stack>{" "}
       <Stack direction="row" justifyContent="center" alignItems="center">
         <RequiredTextFieldWithError
           label="وزن"
@@ -139,7 +133,7 @@ const FormOne = ({ onSubmit }) => {
           onNotError={onNotError}
           fullWidth
         />
-      </Stack>
+      </Stack>{" "}
       <br />
       <Stack direction="row" justifyContent="center" alignItems="center">
         <BirthdateDatePicker
@@ -161,7 +155,7 @@ const FormOne = ({ onSubmit }) => {
           onNotError={onNotError}
           fullWidth
         />
-      </Stack>
+      </Stack>{" "}
       <br />
       <Stack direction="row" justifyContent="flex-end" alignItems="center">
         <Button
@@ -171,15 +165,11 @@ const FormOne = ({ onSubmit }) => {
           endIcon={<NavigateBeforeIcon />}
           onClick={onSubmit}
         >
-          صفحه بعد
-        </Button>
-      </Stack>
+          صفحه بعد{" "}
+        </Button>{" "}
+      </Stack>{" "}
     </Stack>
   );
 };
-
-function calcBMI(weight, height) {
-  return Math.round((weight / (height * height)) * 1000) / 1000;
-}
 
 export default FormOne;

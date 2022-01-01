@@ -1,12 +1,13 @@
-import { createMuiTheme, ThemeProvider } from "@mui/material/styles";
+import {createMuiTheme, ThemeProvider} from "@mui/material/styles";
 import rtlPlugin from "stylis-plugin-rtl";
-import { CacheProvider } from "@emotion/react";
+import {CacheProvider} from "@emotion/react";
 import createCache from "@emotion/cache";
 import FormOne from "./forms/FormOne";
 import FormTwo from "./forms/FormTwo";
+import FinalInfo from "./forms/FinalInfo";
 import * as Atoms from "./recoil_components/atoms";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { Box, Step, StepLabel, Stepper } from "@mui/material";
+import {useRecoilState, useRecoilValue} from "recoil";
+import {Box, Stack, Step, StepLabel, Stepper} from "@mui/material";
 import "./App.css";
 
 // RTL cache and theme handling
@@ -14,7 +15,7 @@ const cacheRtl = createCache({
   key: "muirtl",
   stylisPlugins: [rtlPlugin],
 });
-const themeRtl = createMuiTheme({
+const theme = createMuiTheme({
   direction: "rtl",
   typography: {
     fontFamily: "Yekan",
@@ -36,8 +37,8 @@ function App() {
 
   return (
     <CacheProvider value={cacheRtl}>
-      <ThemeProvider theme={themeRtl}>
-        <div dir="rtl">
+      <ThemeProvider theme={theme}>
+        <div dir="rtl" className="top">
           <Box className="form">
             <h2 className="form-title"> صدور بیمه نامه عمر </h2>
             <Stepper activeStep={pageNum - 1}>
@@ -53,8 +54,9 @@ function App() {
             </Stepper>
             {
               [
-                <FormOne onSubmit={nextPage} />,
-                <FormTwo onSubmit={nextPage} />,
+                <FormOne onSubmit={nextPage}/>,
+                <FormTwo onSubmit={nextPage}/>,
+                <FinalInfo/>,
               ][pageNum - 1]
             }
           </Box>
