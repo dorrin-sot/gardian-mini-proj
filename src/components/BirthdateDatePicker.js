@@ -84,7 +84,7 @@ const BirthdateDatePicker = ({
             required={required}
           />
         )}
-      />{" "}
+      />
     </LocalizationProvider>
   );
 };
