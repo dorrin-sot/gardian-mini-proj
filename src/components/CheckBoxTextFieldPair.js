@@ -2,6 +2,7 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
+  Stack,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -30,35 +31,37 @@ const CheckBoxTextFieldPair = ({
   console.log(label, id, boolValue);
   return (
     <Box sx={{ mt: 1.5 }}>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Box>
-              <Checkbox
-                label="cdscds"
-                checked={boolValue}
-                onChange={handleBoolValueChange}
-              />
-              <RequiredTextFieldWithError
-                id={id}
-                label={`روزی چند بار ${label} میکشید؟`}
-                recoilState={countRecoilState}
-                type="number"
-                onError={onError}
-                onNotError={onNotError}
-                customErrors={customErrors}
-                disabled={!boolValue}
-              />
-            </Box>
-          }
-          label={
-            <Typography
-              style={{ fontFamily: "Yekan" }}
-            >{`آیا ${label} میکشید؟`}</Typography>
-          }
-          labelPlacement="top"
+      <Stack direction="column" justifyContent="center" alignItems="center">
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Box>
+                <Checkbox
+                  label="cdscds"
+                  checked={boolValue}
+                  onChange={handleBoolValueChange}
+                />
+              </Box>
+            }
+            label={
+              <Typography
+                style={{ fontFamily: "Yekan" }}
+              >{`آیا ${label} میکشید؟`}</Typography>
+            }
+            labelPlacement="end"
+          />
+        </FormGroup>
+        <RequiredTextFieldWithError
+          id={id}
+          label={`روزی چند بار ${label} میکشید؟`}
+          recoilState={countRecoilState}
+          type="number"
+          onError={onError}
+          onNotError={onNotError}
+          customErrors={customErrors}
+          disabled={!boolValue}
         />
-      </FormGroup>
+      </Stack>
     </Box>
   );
 };

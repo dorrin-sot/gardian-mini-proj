@@ -30,7 +30,7 @@ export const stepsState = selector({
   },
 });
 
-// is the current page number 
+// is the current page number
 // the first page (in "pagesCompletionState") that wasnt completed (is false)
 export const pageNumberState = selector({
   key: "pageNumberState",

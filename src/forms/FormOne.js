@@ -1,9 +1,9 @@
-import { Box, Button } from "@mui/material";
+import { Stack, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";
 import * as Atoms from "../recoil_components/atoms";
-import NavigateNext from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import "../App.css";
 
 const FormOne = ({ onSubmit, stepper }) => {
@@ -81,91 +81,106 @@ const FormOne = ({ onSubmit, stepper }) => {
   };
 
   return (
-    <Box>
-      <RequiredTextFieldWithError
-        id="firstName"
-        label="نام"
-        recoilState={Atoms.firstNameState}
-        onError={onError}
-        onNotError={onNotError}
-      />
-      <RequiredTextFieldWithError
-        label="نام خانوادگی"
-        id="lastName"
-        recoilState={Atoms.lastNameState}
-        onError={onError}
-        onNotError={onNotError}
-      />
+    <Stack>
+      <Stack direction="row" justifyContent="center" alignItems="center">
+        <RequiredTextFieldWithError
+          id="firstName"
+          label="نام"
+          recoilState={Atoms.firstNameState}
+          onError={onError}
+          onNotError={onNotError}
+          fullWidth
+        />
+        <RequiredTextFieldWithError
+          label="نام خانوادگی"
+          id="lastName"
+          recoilState={Atoms.lastNameState}
+          onError={onError}
+          onNotError={onNotError}
+          fullWidth
+        />
+      </Stack>
+      <Stack direction="row" justifyContent="center" alignItems="center">
+        <RequiredTextFieldWithError
+          label="تلفن همراه"
+          id="phoneNumber"
+          recoilState={Atoms.phoneNumberState}
+          customErrors={customErrors.phoneNumber}
+          onError={onError}
+          onNotError={onNotError}
+        />
+        <RequiredTextFieldWithError
+          label="ایمیل"
+          id="email"
+          type="email"
+          recoilState={Atoms.emailState}
+          customErrors={customErrors.email}
+          onError={onError}
+          onNotError={onNotError}
+          fullWidth
+        />
+      </Stack>
+      <Stack direction="row" justifyContent="center" alignItems="center">
+        <RequiredTextFieldWithError
+          label="وزن"
+          id="weight"
+          recoilState={Atoms.weightState}
+          type="number"
+          customErrors={customErrors.weight}
+          adornment="کیلوگرم"
+          onError={onError}
+          onNotError={onNotError}
+          fullWidth
+        />
+        <RequiredTextFieldWithError
+          id="height"
+          label="قد"
+          helperText={BMI > 0 && `BMI شما: ${BMI}`}
+          recoilState={Atoms.heightState}
+          type="number"
+          customErrors={customErrors.height}
+          adornment="متر"
+          onError={onError}
+          onNotError={onNotError}
+          fullWidth
+        />
+      </Stack>
       <br />
-      <RequiredTextFieldWithError
-        label="تلفن همراه"
-        id="phoneNumber"
-        recoilState={Atoms.phoneNumberState}
-        customErrors={customErrors.phoneNumber}
-        onError={onError}
-        onNotError={onNotError}
-      />
-      <RequiredTextFieldWithError
-        label="ایمیل"
-        id="email"
-        type="email"
-        recoilState={Atoms.emailState}
-        customErrors={customErrors.email}
-        onError={onError}
-        onNotError={onNotError}
-      />
+      <Stack direction="row" justifyContent="center" alignItems="center">
+        {/* <RequiredTextFieldWithError
+          label="سن"
+          id="age"
+          recoilState={Atoms.ageState}
+          type="number"
+          customErrors={customErrors.age}
+          onError={onError}
+          onNotError={onNotError}
+          fullWidth
+        /> */}
+        <RequiredTextFieldWithError
+          label="بیمه انتخابی"
+          recoilState={Atoms.agencyState}
+          menuItems={Atoms.agencies}
+          select
+          onError={onError}
+          onNotError={onNotError}
+          fullWidth
+        />
+      </Stack>
       <br />
-
-      {/* <RequiredTextFieldWithError
-        label="سن"
-        id="age"
-        recoilState={Atoms.ageState}
-        type="number"
-        customErrors={customErrors.age}
-        onError={onError}
-        onNotError={onNotError}
-      /> */}
-      <RequiredTextFieldWithError
-        label="وزن"
-        id="weight"
-        recoilState={Atoms.weightState}
-        type="number"
-        customErrors={customErrors.weight}
-        adornment="کیلوگرم"
-        onError={onError}
-        onNotError={onNotError}
-      />
-      <RequiredTextFieldWithError
-        id="height"
-        label="قد"
-        helperText={BMI > 0 && `BMI شما: ${BMI}`}
-        recoilState={Atoms.heightState}
-        type="number"
-        customErrors={customErrors.height}
-        adornment="متر"
-        onError={onError}
-        onNotError={onNotError}
-      />
-      <RequiredTextFieldWithError
-        label="بیمه انتخابی"
-        recoilState={Atoms.agencyState}
-        menuItems={Atoms.agencies}
-        select
-        onError={onError}
-        onNotError={onNotError}
-      />
-      <br />
-      <Button
-        className="submit-form-btn"
-        variant="outlined"
-        type="submit"
-        disabled={erroredFields.length > 0}
-        startIcon={<NavigateNext />}
-        onClick={onSubmit}
-      >
-        <span className="submit-form-btn">صفحه بعد</span>
-      </Button>
-    </Box>
+      <Stack direction="row" justifyContent="flex-end" alignItems="center">
+        <Button
+          className="submit-form-btn"
+          variant="outlined"
+          type="submit"
+          disabled={erroredFields.length > 0}
+          endIcon={<NavigateBeforeIcon />}
+          onClick={onSubmit}
+        >
+          <span className="submit-form-btn">صفحه بعد</span>
+        </Button>
+      </Stack>
+    </Stack>
   );
 };
 

@@ -67,7 +67,7 @@ const RequiredTextFieldWithError = ({
         m: 2,
         mt: 2,
         mb: 3,
-        width: fullWidth ? 750 : id === "email" ? 425 : 200,
+        width: fullWidth ? 650 : id === "email" ? 425 : 300,
       }}
       className="form-field"
       label={label}

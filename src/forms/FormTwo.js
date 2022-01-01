@@ -1,7 +1,7 @@
-import { Box, Button, Checkbox } from "@mui/material";
+import { Box, Button, Checkbox, Divider, Stack } from "@mui/material";
 import { useState } from "react";
 import * as Atoms from "../recoil_components/atoms";
-import NavigateNext from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import "../App.css";
 import CheckBoxTextFieldPair from "../components/CheckBoxTextFieldPair";
 import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";
@@ -39,47 +39,58 @@ const FormTwo = ({ onSubmit, stepper }) => {
   };
 
   return (
-    <Box>
-      <CheckBoxTextFieldPair
-        id="smoking"
-        label="سیگار"
-        boolRecoilState={Atoms.doesSmokeState}
-        countRecoilState={Atoms.smokeCountState}
-        onError={onError}
-        onNotError={onNotError}
-        customErrors={customErrors.smokeCount}
-      />
-      <CheckBoxTextFieldPair
-        id="vaping"
-        label="قلیان"
-        boolRecoilState={Atoms.doesVapeState}
-        countRecoilState={Atoms.vapeCountState}
-        onError={onError}
-        onNotError={onNotError}
-        customErrors={customErrors.vapeCount}
-      />
+    <Stack>
+      <br />
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        divider={<Divider orientation="vertical" flexItem />}
+      >
+        <CheckBoxTextFieldPair
+          id="smoking"
+          label="سیگار"
+          boolRecoilState={Atoms.doesSmokeState}
+          countRecoilState={Atoms.smokeCountState}
+          onError={onError}
+          onNotError={onNotError}
+          customErrors={customErrors.smokeCount}
+        />
+        <CheckBoxTextFieldPair
+          id="vaping"
+          label="قلیان"
+          boolRecoilState={Atoms.doesVapeState}
+          countRecoilState={Atoms.vapeCountState}
+          onError={onError}
+          onNotError={onNotError}
+          customErrors={customErrors.vapeCount}
+        />
+      </Stack>
       <RequiredTextFieldWithError
         label="بیماری‌ها و معلولیت‌ها"
         id="sicknesses"
-        fullWidth
         multiline
         required={false}
-        onError={(id) => {}}
-        onNotError={(id) => {}}
+        onError={(_) => {}}
+        onNotError={(_) => {}}
         recoilState={Atoms.sicknessesState}
         helperText="فهرستی از بیماری‌ها و یا معلولیت‌هایتان را در اینجا بنویسید"
+        fullWidth
       />
       <br />
-      <Button
-        variant="outlined"
-        type="submit"
-        disabled={erroredFields.length > 0}
-        startIcon={<NavigateNext />}
-        onClick={onSubmit}
-      >
-        <span className="submit-form-btn">صفحه بعد</span>
-      </Button>
-    </Box>
+      <Stack direction="row" justifyContent="flex-end" alignItems="center">
+        <Button
+          className="submit-form-btn"
+          variant="outlined"
+          type="submit"
+          disabled={erroredFields.length > 0}
+          endIcon={<NavigateBeforeIcon />}
+          onClick={onSubmit}
+        >
+          <span className="submit-form-btn">صفحه بعد</span>
+        </Button>
+      </Stack>
+    </Stack>
   );
 };
 
