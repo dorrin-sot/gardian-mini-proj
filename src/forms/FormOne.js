@@ -1,11 +1,11 @@
 import { Stack, Button } from "@mui/material";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
-import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";
 import * as Atoms from "../recoil_components/atoms";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import "../App.css";
 import BirthdateDatePicker from "../components/BirthdateDatePicker";
+import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";
+import "../App.css";
 
 const FormOne = ({ onSubmit, isMobile }) => {
   const customErrors = {
@@ -92,7 +92,7 @@ const FormOne = ({ onSubmit, isMobile }) => {
           onNotError={onNotError}
           fullWidth
         />
-      </Stack>
+      </Stack>{" "}
       <Stack
         direction={isMobile ? "column" : "row"}
         justifyContent="center"
@@ -106,7 +106,7 @@ const FormOne = ({ onSubmit, isMobile }) => {
           onError={onError}
           onNotError={onNotError}
           fullWidth={isMobile}
-        />
+        />{" "}
         <RequiredTextFieldWithError
           label="ایمیل"
           id="email"
@@ -117,7 +117,7 @@ const FormOne = ({ onSubmit, isMobile }) => {
           onNotError={onNotError}
           fullWidth
         />
-      </Stack>
+      </Stack>{" "}
       <Stack
         direction={isMobile ? "column" : "row"}
         justifyContent="center"
@@ -146,8 +146,8 @@ const FormOne = ({ onSubmit, isMobile }) => {
           onNotError={onNotError}
           fullWidth
         />
-      </Stack>
-      {!isMobile && <br />}
+      </Stack>{" "}
+      {!isMobile && <br />}{" "}
       <Stack
         direction={isMobile ? "column" : "row"}
         justifyContent="center"
@@ -172,7 +172,7 @@ const FormOne = ({ onSubmit, isMobile }) => {
           onNotError={onNotError}
           fullWidth
         />
-      </Stack>
+      </Stack>{" "}
       <br />
       <Stack direction="row" justifyContent="flex-end" alignItems="center">
         <Button
@@ -182,9 +182,9 @@ const FormOne = ({ onSubmit, isMobile }) => {
           endIcon={<NavigateBeforeIcon />}
           onClick={onSubmit}
         >
-          صفحه بعد
-        </Button>
-      </Stack>
+          صفحه بعد{" "}
+        </Button>{" "}
+      </Stack>{" "}
     </Stack>
   );
 };

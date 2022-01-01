@@ -4,7 +4,7 @@ import moment from "moment";
 // a list of booleans to show if each page is completed or not
 export const pagesCompletionState = atom({
   key: "pagesCompletionState",
-  default: [false, false, false],
+  default: [true, false, false],
 });
 
 export const stepsState = selector({
@@ -13,17 +13,17 @@ export const stepsState = selector({
     const completeds = get(pagesCompletionState);
     return [
       {
-        label: "وارد کردن اطلاعات شخصی",
+        label: "اطلاعات شخصی",
         completed: completeds[0],
         num: 1,
       },
       {
-        label: "وارد کردن اطلاعات پزشکی",
+        label: "اطلاعات پزشکی",
         completed: completeds[1],
         num: 2,
       },
       {
-        label: "مرور اطلاعات",
+        label: "ارسال اطلاعات",
         completed: completeds[2],
         num: 3,
       },

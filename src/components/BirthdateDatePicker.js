@@ -1,10 +1,10 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import TextField from "@mui/material/TextField";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DatePicker from "@mui/lab/DatePicker";
-import "../App.css";
 import { useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { TextField } from "@mui/material";
+import DatePicker from "@mui/lab/DatePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import "../App.css";
 
 const BirthdateDatePicker = ({
   id,
@@ -84,7 +84,7 @@ const BirthdateDatePicker = ({
             required={required}
           />
         )}
-      />
+      />{" "}
     </LocalizationProvider>
   );
 };

@@ -1,22 +1,30 @@
-import { createMuiTheme, ThemeProvider } from "@mui/material/styles";
 import rtlPlugin from "stylis-plugin-rtl";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
-import FormOne from "./forms/FormOne";
-import FormTwo from "./forms/FormTwo";
-import FinalInfo from "./forms/FinalInfo";
 import * as Atoms from "./recoil_components/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { Box, Step, StepLabel, Stepper } from "@mui/material";
-import "./App.css";
 import { useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
+import FormOne from "./forms/FormOne";
+import FormTwo from "./forms/FormTwo";
+import {
+  Alert,
+  Box,
+  IconButton,
+  Step,
+  StepLabel,
+  Stepper,
+  Snackbar,
+} from "@mui/material";
+import "./App.css";
 
 // RTL cache and theme handling
 const cacheRtl = createCache({
   key: "muirtl",
   stylisPlugins: [rtlPlugin],
 });
-const theme = createMuiTheme({
+const theme = createTheme({
   direction: "rtl",
   typography: {
     fontFamily: "Yekan",
@@ -24,22 +32,29 @@ const theme = createMuiTheme({
 });
 
 function App() {
-  const [pageCompleted, setPageCompleted] = useRecoilState(
+  const [pagesCompleted, setPagesCompleted] = useRecoilState(
     Atoms.pagesCompletionState
   );
   const pageNum = useRecoilValue(Atoms.pageNumberState);
+  const nextPage = () => {
+    // if on last page go back to first page otherwise go to next page
+    setPagesCompleted(
+      pagesCompleted[0] && pagesCompleted[1] && !pagesCompleted[2]
+        ? [false, false, false]
+        : [
+            ...pagesCompleted.slice(0, pageNum - 1),
+            true,
+            ...pagesCompleted.slice(pageNum),
+          ]
+    );
+  };
   const steps = useRecoilValue(Atoms.stepsState);
-  const nextPage = () =>
-    setPageCompleted([
-      ...pageCompleted.slice(0, pageNum - 1),
-      true,
-      ...pageCompleted.slice(pageNum),
-    ]);
 
   const [isMobile, setIsMobile] = useState(getIsMobile());
-
+  // if window is resized, update isMobile
   window.addEventListener("resize", (e) => {
-    if (isMobile != getIsMobile()) setIsMobile(getIsMobile());
+    const newIsMobile = getIsMobile();
+    if (isMobile !== newIsMobile) setIsMobile(newIsMobile);
   });
 
   return (
@@ -51,7 +66,7 @@ function App() {
             <Stepper activeStep={pageNum - 1}>
               {steps.map((step) => (
                 <Step key={step.num} completed={step.completed}>
-                  <StepLabel> {step.label} </StepLabel>
+                  <StepLabel fontSize="inherit"> {step.label} </StepLabel>
                 </Step>
               ))}
             </Stepper>
@@ -59,10 +74,33 @@ function App() {
               [
                 <FormOne onSubmit={nextPage} isMobile={isMobile} />,
                 <FormTwo onSubmit={nextPage} isMobile={isMobile} />,
-                <FinalInfo />,
+                <FormTwo
+                  onSubmit={nextPage}
+                  isMobile={isMobile}
+                  isConfirmPage
+                />,
               ][pageNum - 1]
             }
           </Box>
+          {/* Toast for completeion on last page */}
+          <Snackbar open={pageNum === 3} autoHideDuration={5000}>
+            <Alert
+              variant="filled"
+              severity="success"
+              action={
+                <IconButton
+                  color="inherit"
+                  size="small"
+                  onClick={nextPage} // goes back to first page
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mb: 2 }}
+            >
+              اطلاعات شما با موفقیت ثبت شد!
+            </Alert>
+          </Snackbar>
         </div>
       </ThemeProvider>
     </CacheProvider>

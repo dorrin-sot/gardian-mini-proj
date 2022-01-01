@@ -2,11 +2,12 @@ import { Button, Divider, Stack } from "@mui/material";
 import { useState } from "react";
 import * as Atoms from "../recoil_components/atoms";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 import "../App.css";
 import CheckBoxTextFieldPair from "../components/CheckBoxTextFieldPair";
 import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";
 
-const FormTwo = ({ onSubmit, isMobile }) => {
+const FormTwo = ({ onSubmit, isMobile, isConfirmPage }) => {
   const customErrors = {
     smokeCount: [
       {
@@ -83,10 +84,16 @@ const FormTwo = ({ onSubmit, isMobile }) => {
           variant="outlined"
           type="submit"
           disabled={erroredFields.length > 0}
-          endIcon={<NavigateBeforeIcon />}
+          endIcon={
+            isConfirmPage ? (
+              <SentimentVerySatisfiedIcon />
+            ) : (
+              <NavigateBeforeIcon />
+            )
+          }
           onClick={onSubmit}
         >
-          صفحه بعد
+          {isConfirmPage ? "تایید اطلاعات" : "صفحه بعد"}
         </Button>
       </Stack>
     </Stack>

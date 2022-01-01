@@ -1,6 +1,40 @@
-// import { Stack } from "@mui/material";
+// import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
+// import { Button, Stack } from "@mui/material";
+
+// const FinalInfo = (onSubmit) => {
+//   return (
+//     <Stack>
+//       <br />
+//       <Stack direction="row" justifyContent="center" alignItems="center">
+//         <Button
+//           variant="outlined"
+//           type="submit"
+//           endIcon={<SentimentVerySatisfiedIcon fontSizeLarge />}
+//           onClick={onSubmit}
+//           sx={{
+//             mt: 20,
+//             p: 2,
+//             fontSize: 30,
+//           }}
+//         >
+//           تایید و بازگشت به اول
+//         </Button>
+//       </Stack>
+//     </Stack>
+//   );
+// };
+
+// export default FinalInfo;
+
+
+
+// import * as React from "react";
+// import Paper from "@mui/material/Paper";
+// import { styled } from "@mui/material/styles";
 // import { useRecoilValue } from "recoil";
 // import * as Atoms from "../recoil_components/atoms";
+// import { Box, Stack } from "@mui/material";
+// import { flexbox } from "@mui/system";
 
 // const FinalInfo = () => {
 //   const values = [
@@ -56,12 +90,41 @@
 //   ];
 
 //   return (
-//     <Stack>
-//       <Flow>
-
-//       </Flow>
-//     </Stack>
+//     <div style={{ flexDirection: "row" }}>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//       <Item>Item 1</Item>
+//     </div>
 //   );
 // };
 
 // export default FinalInfo;
+
+// const Item = styled(Paper)(({ theme }) => ({
+//   ...theme.typography.body2,
+//   padding: theme.spacing(1),
+//   textAlign: "center",
+//   width: 100,
+//   color: theme.palette.text.secondary,
+// }));
