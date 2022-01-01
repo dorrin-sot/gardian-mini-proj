@@ -7,7 +7,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import "../App.css";
 import BirthdateDatePicker from "../components/BirthdateDatePicker";
 
-const FormOne = ({ onSubmit, stepper }) => {
+const FormOne = ({ onSubmit }) => {
   const customErrors = {
     age: [
       {
@@ -45,12 +45,6 @@ const FormOne = ({ onSubmit, stepper }) => {
       },
     ],
   };
-
-  const [birthDate, setBirthDate] = useRecoilState(Atoms.birthdateState);
-  useEffect(() => {
-    console.log(birthDate, (Date.now() - birthDate) / (1000 * 60 * 60 * 24));
-    // setAge(Math.floor((Date.now() - birthDate) / (1000 * 60 * 60 * 24*365)));
-  }, []);
 
   // listen for changes in weight and height and update bmi
   const [BMI, setBMI] = useRecoilState(Atoms.bmiState);
@@ -148,16 +142,6 @@ const FormOne = ({ onSubmit, stepper }) => {
       </Stack>
       <br />
       <Stack direction="row" justifyContent="center" alignItems="center">
-        {/* <RequiredTextFieldWithError
-          label="سن"
-          id="age"
-          recoilState={Atoms.ageState}
-          type="number"
-          customErrors={customErrors.age}
-          onError={onError}
-          onNotError={onNotError}
-          fullWidth
-        /> */}
         <BirthdateDatePicker
           label="تاریخ تولد"
           dateState={Atoms.birthdateState}

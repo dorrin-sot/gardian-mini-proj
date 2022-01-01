@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Divider, Stack } from "@mui/material";
+import { Button, Divider, Stack } from "@mui/material";
 import { useState } from "react";
 import * as Atoms from "../recoil_components/atoms";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
@@ -6,7 +6,7 @@ import "../App.css";
 import CheckBoxTextFieldPair from "../components/CheckBoxTextFieldPair";
 import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";
 
-const FormTwo = ({ onSubmit, stepper }) => {
+const FormTwo = ({ onSubmit }) => {
   const customErrors = {
     smokeCount: [
       {
@@ -92,9 +92,5 @@ const FormTwo = ({ onSubmit, stepper }) => {
     </Stack>
   );
 };
-
-function calcBMI(weight, height) {
-  return Math.round((weight / (height * height)) * 1000) / 1000;
-}
 
 export default FormTwo;

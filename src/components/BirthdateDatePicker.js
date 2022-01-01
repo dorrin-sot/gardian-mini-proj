@@ -5,7 +5,6 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import "../App.css";
 import { useState } from "react";
-import moment from "moment";
 
 const BirthdateDatePicker = ({
   id,
