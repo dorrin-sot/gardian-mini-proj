@@ -17,9 +17,9 @@ body {
 }
 
 #bg {
-    background: linear-gradient(-45deg, #4000ff, #00bbff, #00ffc3);
+    background: linear-gradient(-45deg, #7244ff, #ff3c3c, #ffcb47);
     background-size: 400% 400%;
-    animation: gradient-anim 10s ease infinite;
+    animation: gradient-anim 5s ease infinite;
 }
 
 @keyframes gradient-anim {
@@ -37,7 +37,7 @@ body {
 }
 
 .form {
-    background-color: rgb(255, 241, 241);
+    background-color: rgb(255, 241, 241, .85);
     border-radius: 25px;
     width: 55%;
     min-height: 570px;
