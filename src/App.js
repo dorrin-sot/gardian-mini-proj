@@ -1,14 +1,15 @@
-import {createMuiTheme, ThemeProvider} from "@mui/material/styles";
+import { createMuiTheme, ThemeProvider } from "@mui/material/styles";
 import rtlPlugin from "stylis-plugin-rtl";
-import {CacheProvider} from "@emotion/react";
+import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import FormOne from "./forms/FormOne";
 import FormTwo from "./forms/FormTwo";
 import FinalInfo from "./forms/FinalInfo";
 import * as Atoms from "./recoil_components/atoms";
-import {useRecoilState, useRecoilValue} from "recoil";
-import {Box, Stack, Step, StepLabel, Stepper} from "@mui/material";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import "./App.css";
+import { useState } from "react";
 
 // RTL cache and theme handling
 const cacheRtl = createCache({
@@ -35,6 +36,12 @@ function App() {
       ...pageCompleted.slice(pageNum),
     ]);
 
+  const [isMobile, setIsMobile] = useState(getIsMobile());
+
+  window.addEventListener("resize", (e) => {
+    if (isMobile != getIsMobile()) setIsMobile(getIsMobile());
+  });
+
   return (
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
@@ -43,20 +50,16 @@ function App() {
             <h2 className="form-title"> صدور بیمه نامه عمر </h2>
             <Stepper activeStep={pageNum - 1}>
               {steps.map((step) => (
-                <Step
-                  onClick={() => console.log(step)}
-                  key={step.num}
-                  completed={step.completed}
-                >
+                <Step key={step.num} completed={step.completed}>
                   <StepLabel> {step.label} </StepLabel>
                 </Step>
               ))}
             </Stepper>
             {
               [
-                <FormOne onSubmit={nextPage}/>,
-                <FormTwo onSubmit={nextPage}/>,
-                <FinalInfo/>,
+                <FormOne onSubmit={nextPage} isMobile={isMobile} />,
+                <FormTwo onSubmit={nextPage} isMobile={isMobile} />,
+                <FinalInfo />,
               ][pageNum - 1]
             }
           </Box>

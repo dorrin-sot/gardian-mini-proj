@@ -12,6 +12,7 @@ const RequiredTextFieldWithError = ({
   customErrors,
   adornment,
   fullWidth,
+  isMobile,
   multiline,
   required = true, // required by default
   select, // is menu-type or not
@@ -66,17 +67,19 @@ const RequiredTextFieldWithError = ({
         m: 2,
         mt: 2,
         mb: 3,
-        width: fullWidth ? 650 : id === "email" ? 425 : 300,
+        // width: fullWidth ? 650 : id === "email" ? 425 : 300,
       }}
       label={label}
       error={error}
-      FormHelperTextProps={{ classes: "field-helper-text" }}
+      FormHelperTextProps={{
+        classes: "field-helper-text",
+      }}
       helperText={errorMessage || helperText}
       value={value}
       onChange={handleChange}
       InputProps={{
         endAdornment: (
-          <InputAdornment position="end">{adornment}</InputAdornment>
+          <InputAdornment position="end"> {adornment} </InputAdornment>
         ),
       }}
       variant="standard"
@@ -87,7 +90,11 @@ const RequiredTextFieldWithError = ({
       select={select}
       disabled={disabled}
       // set default value if it is a menu-type field (has parameter "select")
-      defaultValue={select && { value }}
+      defaultValue={
+        select && {
+          value,
+        }
+      }
     >
       {(menuItems || []).map((val, index) => (
         <MenuItem key={index + 1} value={val}>

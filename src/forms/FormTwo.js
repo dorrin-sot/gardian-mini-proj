@@ -6,7 +6,7 @@ import "../App.css";
 import CheckBoxTextFieldPair from "../components/CheckBoxTextFieldPair";
 import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";
 
-const FormTwo = ({ onSubmit }) => {
+const FormTwo = ({ onSubmit, isMobile }) => {
   const customErrors = {
     smokeCount: [
       {
@@ -34,16 +34,14 @@ const FormTwo = ({ onSubmit }) => {
   const onNotError = (field) => {
     const newErroredFields = erroredFields.filter((f) => f !== field);
     setErroredFields(newErroredFields);
-
-    console.log(newErroredFields);
   };
 
   return (
     <Stack>
       <br />
       <Stack
-        direction="row"
-        justifyContent="center"
+        direction={isMobile ? "column" : "row"}
+        justifyContent="space-evenly"
         alignItems="center"
         divider={<Divider orientation="vertical" flexItem />}
       >
@@ -55,6 +53,7 @@ const FormTwo = ({ onSubmit }) => {
           onError={onError}
           onNotError={onNotError}
           customErrors={customErrors.smokeCount}
+          direction={isMobile ? "row" : "column"}
         />
         <CheckBoxTextFieldPair
           id="vaping"
@@ -64,6 +63,7 @@ const FormTwo = ({ onSubmit }) => {
           onError={onError}
           onNotError={onNotError}
           customErrors={customErrors.vapeCount}
+          direction={isMobile ? "row" : "column"}
         />
       </Stack>
       <RequiredTextFieldWithError
@@ -75,9 +75,9 @@ const FormTwo = ({ onSubmit }) => {
         onNotError={(_) => {}}
         recoilState={Atoms.sicknessesState}
         helperText="فهرستی از بیماری‌ها و یا معلولیت‌هایتان را در اینجا بنویسید"
-        fullWidth
+        fullWidth={false}
       />
-      <br />
+      {!isMobile && <br />}
       <Stack direction="row" justifyContent="flex-end" alignItems="center">
         <Button
           variant="outlined"

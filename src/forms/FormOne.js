@@ -7,7 +7,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import "../App.css";
 import BirthdateDatePicker from "../components/BirthdateDatePicker";
 
-const FormOne = ({ onSubmit }) => {
+const FormOne = ({ onSubmit, isMobile }) => {
   const customErrors = {
     age: [
       {
@@ -71,7 +71,11 @@ const FormOne = ({ onSubmit }) => {
 
   return (
     <Stack>
-      <Stack direction="row" justifyContent="center" alignItems="center">
+      <Stack
+        direction={isMobile ? "column" : "row"}
+        justifyContent="center"
+        alignItems="center"
+      >
         <RequiredTextFieldWithError
           id="firstName"
           label="نام"
@@ -88,8 +92,12 @@ const FormOne = ({ onSubmit }) => {
           onNotError={onNotError}
           fullWidth
         />
-      </Stack>{" "}
-      <Stack direction="row" justifyContent="center" alignItems="center">
+      </Stack>
+      <Stack
+        direction={isMobile ? "column" : "row"}
+        justifyContent="center"
+        alignItems="center"
+      >
         <RequiredTextFieldWithError
           label="تلفن همراه"
           id="phoneNumber"
@@ -97,7 +105,8 @@ const FormOne = ({ onSubmit }) => {
           customErrors={customErrors.phoneNumber}
           onError={onError}
           onNotError={onNotError}
-        />{" "}
+          fullWidth={isMobile}
+        />
         <RequiredTextFieldWithError
           label="ایمیل"
           id="email"
@@ -108,8 +117,12 @@ const FormOne = ({ onSubmit }) => {
           onNotError={onNotError}
           fullWidth
         />
-      </Stack>{" "}
-      <Stack direction="row" justifyContent="center" alignItems="center">
+      </Stack>
+      <Stack
+        direction={isMobile ? "column" : "row"}
+        justifyContent="center"
+        alignItems="center"
+      >
         <RequiredTextFieldWithError
           label="وزن"
           id="weight"
@@ -133,9 +146,13 @@ const FormOne = ({ onSubmit }) => {
           onNotError={onNotError}
           fullWidth
         />
-      </Stack>{" "}
-      <br />
-      <Stack direction="row" justifyContent="center" alignItems="center">
+      </Stack>
+      {!isMobile && <br />}
+      <Stack
+        direction={isMobile ? "column" : "row"}
+        justifyContent="center"
+        alignItems="center"
+      >
         <BirthdateDatePicker
           label="تاریخ تولد"
           dateState={Atoms.birthdateState}
@@ -155,7 +172,7 @@ const FormOne = ({ onSubmit }) => {
           onNotError={onNotError}
           fullWidth
         />
-      </Stack>{" "}
+      </Stack>
       <br />
       <Stack direction="row" justifyContent="flex-end" alignItems="center">
         <Button
@@ -165,9 +182,9 @@ const FormOne = ({ onSubmit }) => {
           endIcon={<NavigateBeforeIcon />}
           onClick={onSubmit}
         >
-          صفحه بعد{" "}
-        </Button>{" "}
-      </Stack>{" "}
+          صفحه بعد
+        </Button>
+      </Stack>
     </Stack>
   );
 };

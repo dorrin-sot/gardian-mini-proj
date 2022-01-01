@@ -18,6 +18,7 @@ const CheckBoxTextFieldPair = ({
   onError,
   onNotError,
   customErrors,
+  direction,
 }) => {
   const [boolValue, setBoolValue] = useRecoilState(boolRecoilState);
 
@@ -28,10 +29,9 @@ const CheckBoxTextFieldPair = ({
     return setBoolValue(newValue);
   };
 
-  console.log(label, id, boolValue);
   return (
     <Box sx={{ mt: 1.5 }}>
-      <Stack direction="column" justifyContent="center" alignItems="center">
+      <Stack direction={direction} justifyContent="center" alignItems="center">
         <FormGroup>
           <FormControlLabel
             control={
