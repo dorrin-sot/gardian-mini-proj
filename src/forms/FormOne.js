@@ -1,7 +1,7 @@
 import { Stack, Button } from "@mui/material";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
-import * as Atoms from "../recoil_components/atoms";
+import * as Atoms from "../recoil/atoms";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import BirthdateDatePicker from "../components/BirthdateDatePicker";
 import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError";

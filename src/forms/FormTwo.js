@@ -1,6 +1,6 @@
 import { Button, Divider, Stack } from "@mui/material";
 import { useState } from "react";
-import * as Atoms from "../recoil_components/atoms";
+import * as Atoms from "../recoil/atoms";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 import "../App.css";

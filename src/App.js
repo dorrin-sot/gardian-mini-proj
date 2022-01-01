@@ -2,8 +2,8 @@ import rtlPlugin from "stylis-plugin-rtl";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
-import * as Atoms from "./recoil_components/atoms";
-import { useRecoilState, useRecoilValue } from "recoil";
+import * as Atoms from "./recoil/atoms";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import FormOne from "./forms/FormOne";
@@ -18,6 +18,7 @@ import {
   Snackbar,
 } from "@mui/material";
 import "./App.css";
+import useResetAllAtoms from "./hooks/useResetAllAtoms";
 
 // RTL cache and theme handling
 const cacheRtl = createCache({
@@ -36,17 +37,18 @@ function App() {
     Atoms.pagesCompletionState
   );
   const pageNum = useRecoilValue(Atoms.pageNumberState);
+  const resetAllAtoms = useResetAllAtoms();
   const nextPage = () => {
-    // if on last page go back to first page otherwise go to next page
-    setPagesCompleted(
-      pagesCompleted[0] && pagesCompleted[1] && !pagesCompleted[2]
-        ? [false, false, false]
-        : [
-            ...pagesCompleted.slice(0, pageNum - 1),
-            true,
-            ...pagesCompleted.slice(pageNum),
-          ]
-    );
+    // if on last page reset all atoms (also causing going back to first page)
+    // otherwise go to next page
+    if (pagesCompleted[0] && pagesCompleted[1] && !pagesCompleted[2]) {
+      resetAllAtoms.forEach((resetFn) => resetFn());
+    } else
+      setPagesCompleted([
+        ...pagesCompleted.slice(0, pageNum - 1),
+        true,
+        ...pagesCompleted.slice(pageNum),
+      ]);
   };
   const steps = useRecoilValue(Atoms.stepsState);
 

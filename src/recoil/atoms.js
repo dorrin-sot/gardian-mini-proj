@@ -1,18 +1,22 @@
-import { atom, selector } from "recoil";
+import {
+  atom,
+  selector
+} from "recoil";
 import moment from "moment";
 
 // a list of booleans to show if each page is completed or not
 export const pagesCompletionState = atom({
   key: "pagesCompletionState",
-  default: [true, false, false],
+  default: [false, false, false],
 });
 
 export const stepsState = selector({
   key: "stepsState",
-  get: ({ get }) => {
+  get: ({
+    get
+  }) => {
     const completeds = get(pagesCompletionState);
-    return [
-      {
+    return [{
         label: "اطلاعات شخصی",
         completed: completeds[0],
         num: 1,
@@ -35,7 +39,9 @@ export const stepsState = selector({
 // the first page (in "pagesCompletionState") that wasnt completed (is false)
 export const pageNumberState = selector({
   key: "pageNumberState",
-  get: ({ get }) => {
+  get: ({
+    get
+  }) => {
     const completeds = get(pagesCompletionState);
     for (var i = 0; i < completeds.length; i++)
       if (!completeds[i]) return i + 1;
@@ -69,7 +75,9 @@ export const birthdateState = atom({
 
 export const ageState = selector({
   key: "ageState",
-  get: ({ get }) =>
+  get: ({
+      get
+    }) =>
     moment(Date.now()).diff(moment(get(birthdateState)), "years"),
 });
 
@@ -86,10 +94,11 @@ export const heightState = atom({
 function calcBMI(weight, height) {
   return Math.round((weight / (height * height)) * 1000) / 1000;
 }
-
 export const bmiState = selector({
   key: "bmiState",
-  get: ({ get }) => {
+  get: ({
+    get
+  }) => {
     const [weight, height] = [get(weightState), get(heightState)];
 
     if (weight > 0 && height > 0) return calcBMI(weight, height);
