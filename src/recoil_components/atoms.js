@@ -1,4 +1,5 @@
 import { atom, selector } from "recoil";
+import moment from "moment";
 
 // a list of booleans to show if each page is completed or not
 export const pagesCompletionState = atom({
@@ -64,6 +65,12 @@ export const emailState = atom({
 export const birthdateState = atom({
   key: "birthdateState",
   default: Date.now(),
+});
+
+export const ageState = selector({
+  key: "ageState",
+  get: ({ get }) =>
+    moment(Date.now()).diff(moment(get(birthdateState)), "years"),
 });
 
 export const weightState = atom({

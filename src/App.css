@@ -22,18 +22,6 @@
     font-size: xx-large;
     text-align: center;
     color: midnightblue;
-}
-
-.submit-form-btn {
-    align-self: flex-start;
-    justify-self: flex-start;
-}
-
-.form-field input,
-.form-field label,
-.form-field helperText,
-.step-label span,
-.submit-form-btn,
-.form-field-adornment span {
-    font-family: Yekan, ui-rounded;
+    margin-top: 0;
+    margin-bottom: 50px
 }

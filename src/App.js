@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createMuiTheme, ThemeProvider } from "@mui/material/styles";
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
@@ -14,8 +14,11 @@ const cacheRtl = createCache({
   key: "muirtl",
   stylisPlugins: [rtlPlugin],
 });
-const themeRtl = createTheme({
+const themeRtl = createMuiTheme({
   direction: "rtl",
+  typography: {
+    fontFamily: "Yekan",
+  },
 });
 
 function App() {
@@ -44,7 +47,7 @@ function App() {
                   key={step.num}
                   completed={step.completed}
                 >
-                  <StepLabel className="step-label"> {step.label} </StepLabel>
+                  <StepLabel> {step.label} </StepLabel>
                 </Step>
               ))}
             </Stepper>

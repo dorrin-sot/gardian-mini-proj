@@ -80,14 +80,13 @@ const FormTwo = ({ onSubmit, stepper }) => {
       <br />
       <Stack direction="row" justifyContent="flex-end" alignItems="center">
         <Button
-          className="submit-form-btn"
           variant="outlined"
           type="submit"
           disabled={erroredFields.length > 0}
           endIcon={<NavigateBeforeIcon />}
           onClick={onSubmit}
         >
-          <span className="submit-form-btn">صفحه بعد</span>
+          صفحه بعد
         </Button>
       </Stack>
     </Stack>

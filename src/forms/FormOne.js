@@ -5,6 +5,7 @@ import RequiredTextFieldWithError from "../components/RequiredTextFieldWithError
 import * as Atoms from "../recoil_components/atoms";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import "../App.css";
+import BirthdateDatePicker from "../components/BirthdateDatePicker";
 
 const FormOne = ({ onSubmit, stepper }) => {
   const customErrors = {
@@ -157,6 +158,16 @@ const FormOne = ({ onSubmit, stepper }) => {
           onNotError={onNotError}
           fullWidth
         /> */}
+        <BirthdateDatePicker
+          label="تاریخ تولد"
+          dateState={Atoms.birthdateState}
+          ageState={Atoms.ageState}
+          onError={onError}
+          onNotError={onNotError}
+          customErrors={customErrors.age}
+          fullWidth
+          required
+        />
         <RequiredTextFieldWithError
           label="بیمه انتخابی"
           recoilState={Atoms.agencyState}
@@ -170,14 +181,13 @@ const FormOne = ({ onSubmit, stepper }) => {
       <br />
       <Stack direction="row" justifyContent="flex-end" alignItems="center">
         <Button
-          className="submit-form-btn"
           variant="outlined"
           type="submit"
           disabled={erroredFields.length > 0}
           endIcon={<NavigateBeforeIcon />}
           onClick={onSubmit}
         >
-          <span className="submit-form-btn">صفحه بعد</span>
+          صفحه بعد
         </Button>
       </Stack>
     </Stack>

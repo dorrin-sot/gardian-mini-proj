@@ -43,11 +43,7 @@ const CheckBoxTextFieldPair = ({
                 />
               </Box>
             }
-            label={
-              <Typography
-                style={{ fontFamily: "Yekan" }}
-              >{`آیا ${label} میکشید؟`}</Typography>
-            }
+            label={<Typography>{`آیا ${label} میکشید؟`}</Typography>}
             labelPlacement="end"
           />
         </FormGroup>

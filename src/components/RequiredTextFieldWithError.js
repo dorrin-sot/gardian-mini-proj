@@ -1,5 +1,5 @@
 import { InputAdornment, MenuItem, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import "../App.css";
 
@@ -55,9 +55,8 @@ const RequiredTextFieldWithError = ({
         }
         noError();
       }
-
-      setValue(newValue);
     }
+    setValue(newValue);
   };
 
   return (
@@ -69,17 +68,15 @@ const RequiredTextFieldWithError = ({
         mb: 3,
         width: fullWidth ? 650 : id === "email" ? 425 : 300,
       }}
-      className="form-field"
       label={label}
       error={error}
+      FormHelperTextProps={{ classes: "field-helper-text" }}
       helperText={errorMessage || helperText}
       value={value}
       onChange={handleChange}
       InputProps={{
         endAdornment: (
-          <InputAdornment className="form-field-adornment" position="end">
-            {adornment}
-          </InputAdornment>
+          <InputAdornment position="end">{adornment}</InputAdornment>
         ),
       }}
       variant="standard"
