@@ -45,6 +45,12 @@ const FormOne = ({ onSubmit, stepper }) => {
     ],
   };
 
+  const [birthDate, setBirthDate] = useRecoilState(Atoms.birthdateState);
+  useEffect(() => {
+    console.log(birthDate, (Date.now() - birthDate) / (1000 * 60 * 60 * 24));
+    // setAge(Math.floor((Date.now() - birthDate) / (1000 * 60 * 60 * 24*365)));
+  }, []);
+
   // listen for changes in weight and height and update bmi
   const [BMI, setBMI] = useRecoilState(Atoms.bmiState);
   const weight = useRecoilValue(Atoms.weightState);
@@ -60,7 +66,6 @@ const FormOne = ({ onSubmit, stepper }) => {
     "lastName",
     "phoneNumber",
     "email",
-    "age",
     "weight",
     "height",
   ]);
@@ -73,14 +78,10 @@ const FormOne = ({ onSubmit, stepper }) => {
   const onNotError = (field) => {
     const newErroredFields = erroredFields.filter((f) => f !== field);
     setErroredFields(newErroredFields);
-
-    console.log(newErroredFields);
   };
 
   return (
-    <Box className="form">
-      <h2 className="form-title">صدور بیمه نامه عمر</h2>
-      {stepper}
+    <Box>
       <RequiredTextFieldWithError
         id="firstName"
         label="نام"
@@ -90,7 +91,7 @@ const FormOne = ({ onSubmit, stepper }) => {
       />
       <RequiredTextFieldWithError
         label="نام خانوادگی"
-        id="lastname"
+        id="lastName"
         recoilState={Atoms.lastNameState}
         onError={onError}
         onNotError={onNotError}
@@ -110,12 +111,12 @@ const FormOne = ({ onSubmit, stepper }) => {
         type="email"
         recoilState={Atoms.emailState}
         customErrors={customErrors.email}
-        fullWidth
         onError={onError}
         onNotError={onNotError}
       />
       <br />
-      <RequiredTextFieldWithError
+
+      {/* <RequiredTextFieldWithError
         label="سن"
         id="age"
         recoilState={Atoms.ageState}
@@ -123,7 +124,7 @@ const FormOne = ({ onSubmit, stepper }) => {
         customErrors={customErrors.age}
         onError={onError}
         onNotError={onNotError}
-      />
+      /> */}
       <RequiredTextFieldWithError
         label="وزن"
         id="weight"
@@ -153,6 +154,7 @@ const FormOne = ({ onSubmit, stepper }) => {
         onError={onError}
         onNotError={onNotError}
       />
+      <br />
       <Button
         className="submit-form-btn"
         variant="outlined"

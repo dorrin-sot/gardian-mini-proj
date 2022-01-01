@@ -39,9 +39,7 @@ const FormTwo = ({ onSubmit, stepper }) => {
   };
 
   return (
-    <Box className="form">
-      <h2 className="form-title">صدور بیمه نامه عمر</h2>
-      {stepper}
+    <Box>
       <CheckBoxTextFieldPair
         id="smoking"
         label="سیگار"

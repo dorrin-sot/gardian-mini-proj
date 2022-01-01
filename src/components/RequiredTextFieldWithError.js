@@ -31,7 +31,6 @@ const RequiredTextFieldWithError = ({
 
     // if error is true add field to list of errored fields
     // otherwise remove it from errored fields
-    console.log(id, err);
     if (err === true) onError(id);
     else onNotError(id);
   };
@@ -68,7 +67,7 @@ const RequiredTextFieldWithError = ({
         m: 2,
         mt: 2,
         mb: 3,
-        width: fullWidth ? 750 : 200,
+        width: fullWidth ? 750 : id === "email" ? 425 : 200,
       }}
       className="form-field"
       label={label}
@@ -78,7 +77,9 @@ const RequiredTextFieldWithError = ({
       onChange={handleChange}
       InputProps={{
         endAdornment: (
-          <InputAdornment position="end">{adornment}</InputAdornment>
+          <InputAdornment className="form-field-adornment" position="end">
+            {adornment}
+          </InputAdornment>
         ),
       }}
       variant="standard"

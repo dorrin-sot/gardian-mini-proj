@@ -21,6 +21,7 @@
     font-family: Cinema;
     font-size: xx-large;
     text-align: center;
+    color: midnightblue;
 }
 
 .submit-form-btn {
@@ -32,6 +33,7 @@
 .form-field label,
 .form-field helperText,
 .step-label span,
-.submit-form-btn {
+.submit-form-btn,
+.form-field-adornment span {
     font-family: Yekan, ui-rounded;
 }

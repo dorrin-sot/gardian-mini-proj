@@ -1,25 +1,44 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
-export const steps = [
-  {
-    label: "وارد کردن اطلاعات شخصی",
-    completed: false,
-    num: 1,
+// a list of booleans to show if each page is completed or not
+export const pagesCompletionState = atom({
+  key: "pagesCompletionState",
+  default: [false, false, false],
+});
+
+export const stepsState = selector({
+  key: "stepsState",
+  get: ({ get }) => {
+    const completeds = get(pagesCompletionState);
+    return [
+      {
+        label: "وارد کردن اطلاعات شخصی",
+        completed: completeds[0],
+        num: 1,
+      },
+      {
+        label: "وارد کردن اطلاعات پزشکی",
+        completed: completeds[1],
+        num: 2,
+      },
+      {
+        label: "مرور اطلاعات",
+        completed: completeds[2],
+        num: 3,
+      },
+    ];
   },
-  {
-    label: "وارد کردن اطلاعات پزشکی",
-    completed: false,
-    num: 2,
-  },
-  {
-    label: "مرور اطلاعات",
-    completed: false,
-    num: 3,
-  },
-];
-export const pageNumberState = atom({
+});
+
+// is the current page number 
+// the first page (in "pagesCompletionState") that wasnt completed (is false)
+export const pageNumberState = selector({
   key: "pageNumberState",
-  default: steps[1].num,
+  get: ({ get }) => {
+    const completeds = get(pagesCompletionState);
+    for (var i = 0; i < completeds.length; i++)
+      if (!completeds[i]) return i + 1;
+  },
 });
 
 export const firstNameState = atom({
@@ -42,9 +61,9 @@ export const emailState = atom({
   default: "",
 });
 
-export const ageState = atom({
-  key: "ageState",
-  default: 0,
+export const birthdateState = atom({
+  key: "birthdateState",
+  default: Date.now(),
 });
 
 export const weightState = atom({

@@ -4,9 +4,9 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import FormOne from "./forms/FormOne";
 import FormTwo from "./forms/FormTwo";
-import { pageNumberState, steps } from "./recoil_components/atoms";
-import { useRecoilState } from "recoil";
-import { Step, StepLabel, Stepper } from "@mui/material";
+import * as Atoms from "./recoil_components/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import "./App.css";
 
 // RTL cache and theme handling
@@ -19,35 +19,42 @@ const themeRtl = createTheme({
 });
 
 function App() {
-  const [pageNum, setPageNum] = useRecoilState(pageNumberState);
-  const nextPage = () => setPageNum(pageNum + 1);
-
-  const pageStepper = (
-    <Stepper activeStep={pageNum - 1}>
-      {steps.map((step) => (
-        <Step key={step.num} completed={step.completed}>
-          <StepLabel className="step-label">{step.label}</StepLabel>
-        </Step>
-      ))}
-    </Stepper>
+  const [pageCompleted, setPageCompleted] = useRecoilState(
+    Atoms.pagesCompletionState
   );
+  const pageNum = useRecoilValue(Atoms.pageNumberState);
+  const steps = useRecoilValue(Atoms.stepsState);
+  const nextPage = () =>
+    setPageCompleted([
+      ...pageCompleted.slice(0, pageNum - 1),
+      true,
+      ...pageCompleted.slice(pageNum),
+    ]);
 
   return (
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={themeRtl}>
         <div dir="rtl">
-          {
-            [
-              <FormOne
-                onSubmit={nextPage}
-                stepper={pageStepper}
-              />,
-              <FormTwo
-                onSubmit={nextPage}
-                stepper={pageStepper}
-              />,
-            ][pageNum - 1]
-          }
+          <Box className="form">
+            <h2 className="form-title"> صدور بیمه نامه عمر </h2>
+            <Stepper activeStep={pageNum - 1}>
+              {steps.map((step) => (
+                <Step
+                  onClick={() => console.log(step)}
+                  key={step.num}
+                  completed={step.completed}
+                >
+                  <StepLabel className="step-label"> {step.label} </StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+            {
+              [
+                <FormOne onSubmit={nextPage} />,
+                <FormTwo onSubmit={nextPage} />,
+              ][pageNum - 1]
+            }
+          </Box>
         </div>
       </ThemeProvider>
     </CacheProvider>
