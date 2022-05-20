@@ -2,7 +2,7 @@
   "name": "gardian-proj",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://dorrin-sot.github.io/gardian-mini-proj",
+  "homepage": "https://dorrin-sot.github.io/gardian-mini-proj/",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
